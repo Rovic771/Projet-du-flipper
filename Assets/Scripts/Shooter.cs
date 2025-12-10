@@ -25,6 +25,7 @@ public class Shooter : MonoBehaviour
         if (canPush && Input.GetKey(key))
         {
             push = true;
+            Debug.Log("coucou");
         }
     }
 

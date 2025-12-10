@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject Ball;
     public void LoseBall()
     {
-        Instantiate(Ball, new Vector3(2f, -0.2f, 1f), Quaternion.identity);
+        Instantiate(Ball, new Vector3(8.8f,0.4f,1), Quaternion.identity);
         Debug.Log("Lose Ball");
     }
 }
