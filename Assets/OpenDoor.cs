@@ -3,6 +3,7 @@ using UnityEngine;
 public class OpenDoor : MonoBehaviour
 {
     [SerializeField] private Animation DoorAnimation;
+    [SerializeField] private Tapis TapisScript;
     private void OnTriggerEnter(Collider other)
     {
         if (DoorAnimation != null)
@@ -13,5 +14,6 @@ public class OpenDoor : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        TapisScript.PosInit();
     }
 }
