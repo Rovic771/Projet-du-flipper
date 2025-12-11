@@ -22,7 +22,11 @@ public class Tapis : MonoBehaviour
         if (Surtapis == true)
         {
             Caisse.transform.position += new Vector3(VitesseTapis, 0, 0) * Time.fixedDeltaTime;
-            Debug.Log("ça bouge");
         }
+    }
+    
+    private void PosInit()
+    {S
+        Caisse.transform.position = new Vector3(-4.8f, -6.5f, -3);
     }
 }
