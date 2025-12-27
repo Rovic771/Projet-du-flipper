@@ -40,7 +40,7 @@ public class Shooter : MonoBehaviour
 
         if (push)
         {
-            test.isKinematic = false;
+            test.isKinematic = true;
 
             if (transform.localPosition.y > decal)
             {
