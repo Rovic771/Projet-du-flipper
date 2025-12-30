@@ -1,50 +1,69 @@
 using UnityEngine;
 
-//
-
 public class Shooter : MonoBehaviour
 {
+    [Header("Réglages")]
+    public float maxPullDistance = 2f; // Distance max (ex: 2)
+    public float loadingSpeed = 2f;    // Vitesse de recul
+    public float shootForce = 20f;     // Puissance du tir
+    public KeyCode key = KeyCode.Space;
 
-    // Shooter Settings
+    [Header("Composants")]
+    public Rigidbody rb;
 
-    [Header("Shooter Settings")] [SerializeField]
-    private float decal;
+    private Vector3 startPos;
+    private bool isCharging = false;
 
-    [SerializeField] private float accel;
-    [SerializeField] private float loadingSpeed = 1;
-
-    [Space(10)]
-
-    // Buttons Keys Objects
-
-    [Header("Buttons Keys Objects")]
-    [SerializeField]
-    private KeyCode key = KeyCode.Space;
-
-    [SerializeField] private Rigidbody rigidBody;
-
-    // Bool Variables
-
-    private bool _keyUp;
-    private bool _push;
-    private bool _canPush;
-
-    //
-
-    // Base Functions
-
-    private void Update()
+    void Start()
     {
-        if (Input.GetKeyUp(key))
+        if (rb == null) rb = GetComponent<Rigidbody>();
+        startPos = transform.localPosition; // On mémorise le point zéro
+        
+        // Setup initial
+        rb.isKinematic = true; 
+        rb.useGravity = false;
+    }
+
+    void FixedUpdate()
+    {
+        // 1. CHARGEMENT (On appuie)
+        if (Input.GetKey(key))
         {
-            _keyUp = true;
-            _canPush = false;
-            _push = false;
+            isCharging = true;
+            rb.isKinematic = true; // On prend le contrôle manuel
+
+            // On calcule où on veut aller (vers le bas)
+            // On utilise Vector3.down (ou -transform.up)
+            float currentY = transform.localPosition.y;
+            float targetY = startPos.y - maxPullDistance;
+
+            // Si on est pas encore en bas, on descend
+            if (currentY > targetY)
+            {
+                // On déplace le Rigidbody proprement sans physique
+                Vector3 newPos = transform.localPosition - (transform.up * loadingSpeed * Time.fixedDeltaTime);
+                rb.MovePosition(transform.parent.TransformPoint(newPos));
+            }
+        }
+        // 2. TIR (On relâche)
+        else if (isCharging) 
+        {
+            // On active la physique pour le tir !
+            rb.isKinematic = false;
+            isCharging = false;
+
+            // On applique une IMPULSION (un coup sec, pas une accélération lente)
+            rb.AddForce(transform.up * shootForce, ForceMode.Impulse);
         }
 
-        if (_canPush && Input.GetKey(key))
+        // 3. BUTÉE (Retour position initiale)
+        // Si le shooter dépasse sa position de départ vers le haut
+        if (!isCharging && transform.localPosition.y >= startPos.y)
         {
-            _push = true;
+            // On stop tout
+            rb.linearVelocity = Vector3.zero;
+            transform.localPosition = startPos;
+            rb.isKinematic = true;
         }
     }
 }
