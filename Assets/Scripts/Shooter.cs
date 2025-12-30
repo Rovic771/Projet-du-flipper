@@ -1,81 +1,50 @@
 using UnityEngine;
 
+//
+
 public class Shooter : MonoBehaviour
 {
-    public float decal;
-    public float accel;
-    public float loadingSpeed = 1;
-    public KeyCode key          = KeyCode.Space;
-    public Rigidbody test;
-    
-    public bool keyUp;
-    public bool push;
-    public bool canPush;
 
-    void Update()
+    // Shooter Settings
+
+    [Header("Shooter Settings")] [SerializeField]
+    private float decal;
+
+    [SerializeField] private float accel;
+    [SerializeField] private float loadingSpeed = 1;
+
+    [Space(10)]
+
+    // Buttons Keys Objects
+
+    [Header("Buttons Keys Objects")]
+    [SerializeField]
+    private KeyCode key = KeyCode.Space;
+
+    [SerializeField] private Rigidbody rigidBody;
+
+    // Bool Variables
+
+    private bool _keyUp;
+    private bool _push;
+    private bool _canPush;
+
+    //
+
+    // Base Functions
+
+    private void Update()
     {
         if (Input.GetKeyUp(key))
         {
-            keyUp = true;
-
-            canPush = false;
-            push = false;
+            _keyUp = true;
+            _canPush = false;
+            _push = false;
         }
 
-        if (canPush && Input.GetKey(key))
+        if (_canPush && Input.GetKey(key))
         {
-            push = true;
-            Debug.Log("coucou");
+            _push = true;
         }
-    }
-
-    void FixedUpdate()
-    {
-        if (keyUp)
-        {
-            test.isKinematic = false;
-
-            keyUp = false;
-        }
-
-        if (push)
-        {
-            test.isKinematic = true;
-
-            if (transform.localPosition.y > decal)
-            {
-                //allows down movement
-
-                test.linearVelocity += loadingSpeed * transform.up;
-            }
-            else
-            {
-                //constraint when push is true
-
-                test.linearVelocity = Vector3.zero;
-                test.isKinematic = true;
-            }
-        }
-        else
-        {
-            if (transform.localPosition.y < 0)
-            {
-                //allows up movement
-
-                test.linearVelocity += transform.up * accel;
-            }
-            else
-            {
-                //constraint when push is false
-
-                test.isKinematic = true;
-                transform.localPosition = Vector3.zero;
-
-                canPush = true;
-            }
-        }
-        
-        transform.localPosition = new Vector3(0, transform.localPosition.y, 0);
-        
     }
 }

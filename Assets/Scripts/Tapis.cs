@@ -27,7 +27,7 @@ public class Tapis : MonoBehaviour
     
     public void PosInit()
     {
-        Caisse.transform.position = new Vector3(-8.5f,1,0.3f);
+        Caisse.transform.position = new Vector3(-12,1,0.3f);
         Caisse.transform.rotation = Quaternion.Euler(-90, 0, 0);
     }
 }
