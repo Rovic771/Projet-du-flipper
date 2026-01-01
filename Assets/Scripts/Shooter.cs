@@ -11,6 +11,8 @@ public class Shooter : MonoBehaviour
     [Header("Composants")]
     public Rigidbody rb;
 
+    public GameObject Door;
+
     private Vector3 startPos;
     private bool isCharging = false;
 

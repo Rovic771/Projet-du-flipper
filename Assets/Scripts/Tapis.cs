@@ -3,12 +3,15 @@ using UnityEngine;
 public class Tapis : MonoBehaviour
 {
     [SerializeField] private GameObject Caisse;
+    [SerializeField] private GameObject Ball;
     [SerializeField] private float VitesseTapis = 5f;
     private bool Surtapis = false;
+    private bool BallSurTapis = false;
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("OnTriggerEnter");
         Surtapis = true;
+        BallSurTapis = true;
         
     }
 
@@ -16,12 +19,19 @@ public class Tapis : MonoBehaviour
     {
         Debug.Log("OnTriggerExit");
         Surtapis = false;
+        BallSurTapis = false;
     }
+    
     private void FixedUpdate()
     {
         if (Surtapis == true)
         {
             Caisse.transform.position += new Vector3(VitesseTapis, 0, 0) * Time.fixedDeltaTime;
+        }
+
+        if (BallSurTapis == true)
+        {
+            Ball.transform.position += new Vector3(VitesseTapis, 0, 0) * Time.fixedDeltaTime;
         }
     }
     
