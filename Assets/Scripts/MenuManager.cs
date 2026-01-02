@@ -6,6 +6,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject menu;
     [SerializeField] KeyCode menuKey = KeyCode.Escape;
     [SerializeField] bool menuOpen;
+    [SerializeField] GameObject Monitor;
     [SerializeField] Animation cameraAnimation;
 
     private void Update()
@@ -22,6 +23,7 @@ public class MenuManager : MonoBehaviour
 
             // active/désactive le menu
             menu.SetActive(menuOpen);
+            Monitor.SetActive(!Monitor.active);
 
             // met en pause/reprend le jeu
             Time.timeScale = menuOpen ? 0 : 1;
