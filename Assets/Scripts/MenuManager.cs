@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] GameObject menu;
+    [SerializeField] GameObject GameOverMenu;
     [SerializeField] KeyCode menuKey = KeyCode.Escape;
     [SerializeField] bool menuOpen;
     [SerializeField] GameObject Monitor;
@@ -28,6 +29,11 @@ public class MenuManager : MonoBehaviour
             // met en pause/reprend le jeu
             Time.timeScale = menuOpen ? 0 : 1;
         }
+    }
+
+    public void OpenGameOverMenu()
+    {
+        GameOverMenu.SetActive(true);
     }
 
     public void ReloadScene()
