@@ -5,6 +5,7 @@ public class Bumper : MonoBehaviour
     [SerializeField] float Force = 10f;
     [SerializeField] int score = 10;
     [SerializeField] private Animation anim;
+    [SerializeField] string TypeBumper;
     private void OnCollisionEnter(Collision other)
     {
         Vector3 a = transform.position; ;
@@ -17,10 +18,18 @@ public class Bumper : MonoBehaviour
 
         ScoreManager.instance.AddScore(score);
 
-        if (anim != null)
+        if (other.gameObject.tag == "Ball")
         {
-            anim.Play();
+            if (anim != null)
+            {
+                anim.Play();
+                if (TypeBumper == "Engrenage")
+                {
+                    anim.Play("bumperEngrenage");
+                }
+            }
         }
+
 
         
     }
