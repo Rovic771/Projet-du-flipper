@@ -1627,9 +1627,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 878946579}
+      - m_Target: {fileID: 878946578}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: PlayButton
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1772,7 +1772,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 878946579}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: PlayButton
         m_Mode: 1
@@ -2414,7 +2414,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 878946580}
-  - component: {fileID: 878946579}
   - component: {fileID: 878946581}
   m_Layer: 0
   m_Name: GameManager
@@ -2423,22 +2422,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &878946579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 878946578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c4e8bcb525239e45b238e942ce75afb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menu: {fileID: 1923953799}
-  menuKey: 27
-  menuOpen: 1
-  cameraAnimation: {fileID: 1422686940}
 --- !u!4 &878946580
 Transform:
   m_ObjectHideFlags: 0
@@ -2467,6 +2450,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ball: {fileID: 0}
+  lifeManager: {fileID: 0}
+  menuManager: {fileID: 0}
 --- !u!1 &910438874
 GameObject:
   m_ObjectHideFlags: 0
